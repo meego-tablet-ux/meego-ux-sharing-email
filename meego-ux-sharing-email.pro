@@ -1,4 +1,4 @@
-VERSION=0.2.0
+VERSION=0.2.1
 PLUGIN_QML_TARGET_BASE_PATH = $$[QT_INSTALL_IMPORTS]/MeeGo/Sharing/plugins/
 MSD_PLUGIN_PATH=/usr/lib/meego-ux-sharing/plugins
 TEMPLATE = lib
