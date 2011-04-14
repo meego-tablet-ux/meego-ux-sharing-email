@@ -11,6 +11,8 @@
 #include <QFile>
 #include <QProcess>
 
+#include <meegouxsharingcommon.h>
+
 EmailSharingService::EmailSharingService(MeeGoUXSharingServiceInfo serviceInfo,
                                    QObject *parent) :
     MeeGoUXSharingService(serviceInfo, parent),
@@ -39,7 +41,7 @@ bool EmailSharingService::CancelShare(int opid)
 
 uint EmailSharingService::GetCredsState()
 {
-    return true;
+    return CredsStateValid;
 }
 
 QString EmailSharingService::GetDisplayName()
