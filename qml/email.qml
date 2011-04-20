@@ -19,7 +19,12 @@ Item {
 
   Component.onCompleted: {
       var shareCmd = "/usr/bin/meego-qml-launcher --opengl --app meego-app-email --fullscreen --cmd openComposer --cdata \"" + sharingObj.filesToShare + "\"";
-//      console.log("Launching email: " + shareCmd);
+      if (sharingObj.shareType == MeeGoUXSharingClientQmlObj.ShareTypeText)
+          shareCmd = "/usr/bin/meego-qml-launcher --opengl --app meego-app-email --fullscreen --cmd compose --cdata \";;"
+              + sharingObj.getHashEntryForFile(sharingObj.filesToShare[0], "subject") + ";;"
+              + sharingObj.filesToShare[0] + "\"";
+
+      console.log("Launching email: " + shareCmd + ", shareType: " + sharingObj.shareType);
       spinnerContainer.startSpinner();
       appModel.launch(shareCmd);
       //Have to do it this way so that the parent class can actually

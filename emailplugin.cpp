@@ -37,6 +37,7 @@ bool EmailPlugin::init()
     info.serviceTypes << MEEGO_SHARE_TYPE_IMAGE;
     info.serviceTypes << MEEGO_SHARE_TYPE_VIDEO;
     info.serviceTypes << MEEGO_SHARE_TYPE_AUDIO;
+    info.serviceTypes << MEEGO_SHARE_TYPE_TEXT;
     mServiceInfoList.append(info);
     EmailSharingService *shareSvc = new EmailSharingService(info, this);
     mServices.append(shareSvc);
@@ -58,7 +59,7 @@ QHash<QString, QString> EmailPlugin::metaData()
 {
     QHash<QString, QString> info;
     info[MEEGO_UX_SHARING_SERVICE_PLUGIN_NAME]    = QString("meego-ux-sharing-email");
-    info[MEEGO_UX_SHARING_SERVICE_PLUGIN_VERSION] = QString("0.1.0");
+    info[MEEGO_UX_SHARING_SERVICE_PLUGIN_VERSION] = QString("0.2.2");
     info[MEEGO_UX_SHARING_SERVICE_PLUGIN_DESC]    = QString("email plugin for meego-ux-sharing");
     return info;
 }

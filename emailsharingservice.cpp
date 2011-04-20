@@ -56,7 +56,6 @@ QString EmailSharingService::GetIconPath()
 
 bool EmailSharingService::GetServiceAvailable()
 {
-    //TODO: check if there's at least 1 acct in QMF?
     return true;
 }
 
@@ -103,6 +102,8 @@ QString EmailSharingService::GetUIName(const QString &widgettype,
             type = "video";
         } else if (sharetype == MEEGO_SHARE_TYPE_AUDIO) {
             type = "audio";
+        } else if (sharetype == MEEGO_SHARE_TYPE_TEXT) {
+            type = "text";
         } else {
             type = QString(sharetype).replace(QString("/"), QString("_"));   //Custom type support
         }
@@ -112,7 +113,7 @@ QString EmailSharingService::GetUIName(const QString &widgettype,
         //qml files into the email directory...
         mult = (sharecount > 1 ? "multi" : "single");
         QString filename = QString("%1/%2/%3_%4_%5_%6_%7").arg(QML_TARGET_BASE_PATH, "email", mServiceInfo.serviceName, platform, product, type, mult);
-        //If we don't have a file for this prodct/platform
+        //If we don't have a file for this product/platform
         if (!QFile::exists(filename + ".qml")) {
             //Try just this product
             filename = QString("%1/%2/%3_%4_%5_%6").arg(QML_TARGET_BASE_PATH, "email", mServiceInfo.serviceName, platform, type, mult);
