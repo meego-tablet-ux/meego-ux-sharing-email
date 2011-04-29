@@ -7,7 +7,8 @@
  */
 
 import Qt 4.7
-import MeeGo.Labs.Components 0.1
+import MeeGo.Components 0.1
+import MeeGo.Labs.Components 0.1 as Labs
 import MeeGo.Sharing 0.1
 
 Item {
@@ -25,7 +26,7 @@ Item {
               + sharingObj.filesToShare[0] + "\"";
 
       console.log("Launching email: " + shareCmd + ", shareType: " + sharingObj.shareType);
-      spinnerContainer.startSpinner();
+      spinner.show();
       appModel.launch(shareCmd);
       //Have to do it this way so that the parent class can actually
       //connect to the shared signal - otherwise it never gets it...
@@ -33,73 +34,24 @@ Item {
 
   }
 
-  Item {
-      id: spinnerContainer
-      parent: scene.content
-      anchors.fill: scene.content
-      property variant overlay: null
-
-      TopItem {
-          id: topItem
-      }
-
-      Component {
-          id: spinnerOverlayComponent
-          Item {
-              id: spinnerOverlayInstance
-              anchors.fill: parent
-
-              Connections {
-                  target: qApp
-                  onWindowListUpdated: {
-                      spinnerOverlayInstance.destroy();
-                  }
-              }
-
-              Rectangle {
-                  anchors.fill: parent
-                  color: "black"
-                  opacity: 0.7
-              }
-              Spinner {
-                  anchors.centerIn: parent
-                  spinning: true
-                  onSpinningChanged: {
-                      if (!spinning)
-                      {
-                          spinnerOverlayInstance.destroy()
-                      }
-                  }
-              }
-              MouseArea {
-                  anchors.fill: parent
-                  // eat all mouse events
-              }
-          }
-      }
-
-      function startSpinner() {
-          if (overlay == null)
-          {
-              overlay = spinnerOverlayComponent.createObject(spinnerContainer);
-              overlay.parent = topItem.topItem;
-          }
-      }
+  ModalSpinner {
+      id: spinner
   }
 
   Timer {
       id: signalTimer
-      interval: 1000
+      interval: 6000
       running: false
       repeat: false
       onTriggered: doShared()
   }
 
-  ApplicationsModel {
+  Labs.ApplicationsModel {
     id: appModel
   }
 
   function doShared() {
+      spinner.hide()
       customArea.shared(-1);
   }
 }
