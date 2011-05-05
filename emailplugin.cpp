@@ -38,6 +38,7 @@ bool EmailPlugin::init()
     info.serviceTypes << MEEGO_SHARE_TYPE_VIDEO;
     info.serviceTypes << MEEGO_SHARE_TYPE_AUDIO;
     info.serviceTypes << MEEGO_SHARE_TYPE_TEXT;
+    info.serviceTypes << MEEGO_SHARE_TYPE_VCARD;
     mServiceInfoList.append(info);
     EmailSharingService *shareSvc = new EmailSharingService(info, this);
     mServices.append(shareSvc);

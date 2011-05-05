@@ -104,6 +104,8 @@ QString EmailSharingService::GetUIName(const QString &widgettype,
             type = "audio";
         } else if (sharetype == MEEGO_SHARE_TYPE_TEXT) {
             type = "text";
+        } else if (sharetype == MEEGO_SHARE_TYPE_VCARD) {
+            type = "vcard";
         } else {
             type = QString(sharetype).replace(QString("/"), QString("_"));   //Custom type support
         }

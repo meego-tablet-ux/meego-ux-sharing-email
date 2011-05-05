@@ -24,6 +24,9 @@ Item {
           shareCmd = "/usr/bin/meego-qml-launcher --opengl --app meego-app-email --fullscreen --cmd compose --cdata \";;"
               + sharingObj.getHashEntryForFile(sharingObj.filesToShare[0], "subject") + ";;"
               + sharingObj.filesToShare[0] + "\"";
+      if (sharingObj.shareType == MeeGoUXSharingClientQmlObj.ShareTypeVCard)
+          shareCmd = shareCmd;
+      //TODO: once meego-app-email supports doing a Compose open w/ attachment and a subject, modify the above shareCmd
 
       console.log("Launching email: " + shareCmd + ", shareType: " + sharingObj.shareType);
       spinner.show();
